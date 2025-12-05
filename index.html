@@ -186,13 +186,28 @@
 
 <div class="container">
   <!-- Section 1 -->
-  <section id="section1">
-    <div style="margin-bottom: 15px; font-size: 3rem;">💋</div>
-    <h1>Pronta A Conoscerti</h1>
-    <p class="subtitle">Donne vere nella tua zona vogliono chattare ora.</p>
-    <a href="#" class="btn" onclick="showSection('section2')">CONTINUA</a>
-    <div class="timer" id="timer">⏱️ L'offerta scade in 05:00</div>
-  </section>
+  <section id="page1" class="visible">
+  <div class="falling-effects"></div>
+  <h2>Tonight Feels Alive</h2>
+  <p class="subtitle">People nearby are active right now. New matches drop every minute.</p>
+  <div class="online-count">🔥 1,482 people online in your area</div>
+  <div class="timer">⏳ Free Access for Men: <span id="countdown">05:35</span></div>
+
+  <a href="#page2" class="btn male">I’m a Man <span class="free-tag">Free while timer runs</span></a>
+  <a href="#page2" class="btn female">I’m a Woman</a>
+</section>
+
+<section id="page2" class="hidden">
+  <div class="falling-effects soft"></div>
+  <h2>Your Matches Are Warming Up</h2>
+  <p class="subtitle">Profiles near you are opening chats fast. You’re entering at the busiest moment.</p>
+  <ul class="live-stats">
+    <li>• 63 chats opened in the last 10 minutes</li>
+    <li>• High activity in your area</li>
+    <li>• Instant chat availability: high</li>
+  </ul>
+  <a href="YOUR_CTA_LINK_HERE" class="btn final">Show My Matches</a>
+</section>
 
   <!-- Section 2 -->
   <section id="section2" class="hidden">
