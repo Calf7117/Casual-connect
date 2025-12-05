@@ -1,285 +1,153 @@
-<!-- Updated HTML with festive theme, CTA link inserted, and email confirmation text in Italian -->
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pronta A Conoscerti</title>
+<title>Live Match Finder</title>
+
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #ff6b6b, #ff8e8e, #ffafaf);
-    min-height: 100vh;
-    position: relative;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: #fff;
     overflow-x: hidden;
   }
 
-  .background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80');
-    background-size: cover;
-    background-position: center;
-    filter: blur(6px) brightness(0.8);
-    opacity: 1;
-    z-index: 0;
-    animation: zoomEffect 20s infinite alternate;
+  section {
+    padding: 30px 20px;
+    min-height: 100vh;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
-  @keyframes zoomEffect {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+  .visible { display: flex; }
+
+  h2 { font-size: 28px; margin-bottom: 12px; }
+
+  .subtitle { font-size: 16px; opacity: 0.85; margin-bottom: 18px; }
+
+  .online-count {
+    font-size: 17px;
+    margin-bottom: 14px;
   }
 
-  @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0.7); transform: scale(1); }
-    70% { box-shadow: 0 0 0 15px rgba(255, 71, 87, 0); transform: scale(1.02); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 71, 87, 0); transform: scale(1); }
+  .timer {
+    font-size: 18px;
+    margin-bottom: 25px;
+    color: #ff4444;
+  }
+
+  /* Buttons */
+  .btn {
+    display: block;
+    width: 85%;
+    max-width: 300px;
+    padding: 14px;
+    margin: 12px 0;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 8px;
+    background: #ff0055;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  /* Page transition */
+  .hidden { display: none; }
+
+  /* Falling effects */
+  .fall-item {
+    position: fixed;
+    top: -20px;
+    color: #ff6699;
+    opacity: 0.7;
+    animation: fall linear infinite;
+    z-index: -1;
   }
 
   @keyframes fall {
-    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    0% { transform: translateY(-20px) translateX(0); }
+    100% { transform: translateY(120vh) translateX(30px); }
   }
-
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .floating-emoji {
-    position: fixed;
-    top: -10vh;
-    font-size: 2rem;
-    animation: fall linear infinite;
-    z-index: 2;
-  }
-
-  .container {
-    position: relative;
-    z-index: 1;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  section {
-    margin-bottom: 40px;
-    animation: fadeInUp 0.6s ease-out forwards;
-    background: rgba(0,0,0,0.3);
-    padding: 40px 20px;
-    border-radius: 25px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  }
-
-  .online-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(10px);
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    color: #00ff88;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    z-index: 10;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .dot {
-    width: 8px;
-    height: 8px;
-    background: #00ff88;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #00ff88;
-  }
-
-  h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-align: center;
-    color: white;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  }
-
-  h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-align: center;
-    color: white;
-    margin-bottom: 20px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  }
-
-  .subtitle {
-    font-size: 1.1rem;
-    text-align: center;
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 30px;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  }
-
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 20px;
-    font-size: 1.4rem;
-    font-weight: 700;
-    text-align: center;
-    background: linear-gradient(45deg, #ff4757, #ff6b81);
-    color: white;
-    border: none;
-    border-radius: 50px;
-    text-decoration: none;
-    box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
-    transition: all 0.3s ease;
-    margin-bottom: 10px;
-    animation: pulse 2s infinite;
-  }
-
-  .btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(255, 71, 87, 0.6);
-    background: linear-gradient(45deg, #ff6b81, #ff4757);
-  }
-
-  .hidden { display: none; }
 </style>
 </head>
+
 <body>
-<div class="background-image"></div>
 
-<!-- Falling festive emojis -->
-<script>
-  const emojis = ['🎅','🎁','❄️','☃️','🔔','💋','💕','💃'];
-  for (let i = 0; i < 30; i++) {
-    const e = document.createElement('div');
-    e.className = 'floating-emoji';
-    e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
-    e.style.left = Math.random() * 100 + 'vw';
-    e.style.animationDuration = 4 + Math.random() * 6 + 's';
-    e.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
-    document.body.appendChild(e);
-  }
-</script>
-
-<div class="online-badge">
-  <div class="dot"></div>
-  <span id="user-count">1,248</span> Online
-</div>
-
-<div class="container">
-  <!-- Section 1 -->
-  <section id="page1" class="visible">
-  <div class="falling-effects"></div>
+<!-- PAGE 1 -->
+<section id="page1" class="visible">
   <h2>Tonight Feels Alive</h2>
   <p class="subtitle">People nearby are active right now. New matches drop every minute.</p>
-  <div class="online-count">🔥 1,482 people online in your area</div>
+
+  <div class="online-count" id="onlineUsers">🔥 1,482 people online</div>
+
   <div class="timer">⏳ Free Access for Men: <span id="countdown">05:35</span></div>
 
-  <a href="#page2" class="btn male">I’m a Man <span class="free-tag">Free while timer runs</span></a>
-  <a href="#page2" class="btn female">I’m a Woman</a>
+  <a href="#" id="btnMan" class="btn">I’m a Man</a>
+  <a href="#" id="btnWoman" class="btn">I’m a Woman</a>
 </section>
 
-<section id="page2" class="hidden">
-  <div class="falling-effects soft"></div>
+
+<!-- PAGE 2 -->
+<section id="page2">
   <h2>Your Matches Are Warming Up</h2>
   <p class="subtitle">Profiles near you are opening chats fast. You’re entering at the busiest moment.</p>
-  <ul class="live-stats">
+
+  <ul style="list-style:none; padding:0; margin-bottom:25px; opacity:0.9; font-size:16px;">
     <li>• 63 chats opened in the last 10 minutes</li>
-    <li>• High activity in your area</li>
+    <li>• Activity around you is high</li>
     <li>• Instant chat availability: high</li>
   </ul>
-  <a href="YOUR_CTA_LINK_HERE" class="btn final">Show My Matches</a>
+
+  <a href="YOUR_CTA_LINK_HERE" class="btn">Show My Matches</a>
 </section>
 
-  <!-- Section 2 -->
-  <section id="section2" class="hidden">
-    <h2>Chi stai cercando?</h2>
-    <div class="options-grid">
-      <button class="option-btn" onclick="selectOption(this)">Donna</button>
-      <button class="option-btn" onclick="selectOption(this)">Uomo</button>
-    </div>
-    <a href="#" class="btn" onclick="showSection('section3')">Avanti</a>
-  </section>
-
-  <!-- Section 3 -->
-  <section id="section3" class="hidden">
-    <h2>Perché Sei Qui?</h2>
-    <div class="benefits">
-      <div class="benefit"><div class="benefit-icon">⚡</div><span>Incontri Veloci</span></div>
-      <div class="benefit"><div class="benefit-icon">✓</div><span>Profili Veri</span></div>
-      <div class="benefit"><div class="benefit-icon">🎁</div><span>Registrazione Gratuita</span></div>
-    </div>
-    <a href="#" class="btn" onclick="showSection('section4')">Continua</a>
-  </section>
-
-  <!-- Section 4 -->
-  <section id="section4" class="hidden">
-    <h2>Sei A Un Passo Dal Conoscerla Davvero</h2>
-    <p class="subtitle">Per motivi di sicurezza dobbiamo verificare la tua email. Ti bastano pochi secondi per attivare l'accesso completo alle chat private.</p>
-
-    <a href="https://www.wineisblue.support/click?offer_id=33087&pub_id=235490&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE" class="btn">
-      VERIFICA SUBITO LA TUA EMAIL
-    </a>
-  </section>
-
-  <footer>Servizio per adulti. Registrazione gratuita. Termini e Privacy disponibili nella pagina successiva.</footer>
-</div>
-
 <script>
-  let timeLeft = 300;
-  const timerElement = document.getElementById('timer');
+// Falling effects generator
+function spawnFallItem() {
+  const el = document.createElement("div");
+  el.classList.add("fall-item");
+  el.innerHTML = "❤";
+  el.style.left = Math.random() * 100 + "vw";
+  el.style.animationDuration = (4 + Math.random() * 4) + "s";
+  document.body.appendChild(el);
 
-  function updateTimer() {
-    const minutes = Math.floor(timeLeft / 60);
-    const seconds = timeLeft % 60;
-    timerElement.innerHTML = `⏱️ L'offerta scade in ${minutes.toString().padStart(2,'0')}:${seconds.toString().padStart(2,'0')}`;
-    if (timeLeft > 0) {
-      timeLeft--;
-      setTimeout(updateTimer, 1000);
-    }
-  }
+  setTimeout(() => el.remove(), 8000);
+}
+setInterval(spawnFallItem, 400);
 
-  updateTimer();
+// Live online users
+let users = 1482;
+function animateUsers() {
+  let change = Math.floor(Math.random() * 20) - 10; 
+  users = Math.max(900, users + change);
+  document.getElementById("onlineUsers").innerHTML = `🔥 ${users} people online`;
+}
+setInterval(animateUsers, 3000);
 
-  function updateUsers() {
-    const el = document.getElementById('user-count');
-    let current = parseInt(el.innerText.replace(',', ''));
-    const change = Math.floor(Math.random() * 10) - 3;
-    current += change;
-    el.innerText = current.toLocaleString();
-    setTimeout(updateUsers, 3000);
-  }
+// Countdown timer
+let timer = 5*60 + 35; 
+function updateTimer() {
+  let min = Math.floor(timer / 60);
+  let sec = timer % 60;
+  document.getElementById("countdown").innerHTML =
+    (min < 10 ? "0"+min : min) + ":" + (sec < 10 ? "0"+sec : sec);
 
-  updateUsers();
+  if (timer > 0) timer--;
+}
+setInterval(updateTimer, 1000);
 
-  function showSection(sectionId) {
-    document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-    document.getElementById(sectionId).classList.remove('hidden');
-    window.scrollTo(0, 0);
-  }
-
-  function selectOption(button) {
-    document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
-  }
+// Page switching
+document.getElementById("btnMan").onclick =
+document.getElementById("btnWoman").onclick = function() {
+  document.getElementById("page1").classList.remove("visible");
+  document.getElementById("page2").classList.add("visible");
+};
 </script>
 
 </body>
