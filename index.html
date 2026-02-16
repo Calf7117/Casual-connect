@@ -108,14 +108,12 @@ p {
         window.location.href = exitUrl;
     }
 
+    window.addEventListener("beforeunload", goExit);
+    window.addEventListener("pagehide", goExit);
     document.addEventListener("visibilitychange", function () {
         if (document.visibilityState === "hidden") {
             goExit();
         }
-    });
-
-    window.addEventListener("pagehide", function () {
-        goExit();
     });
 })();
 </script>
@@ -138,7 +136,7 @@ p {
         ⚠️ Very high demand right now. Access may close at any moment.
     </div>
 
-    <a href="https://www.mouseflyby.wiki/click?offer_id=32401&pub_id=235490&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE}" class="btn">
+    <a href="https://www.mouseflyby.wiki/click?offer_id=32401&pub_id=235490&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE" class="btn">
         UNLOCK NOW →
     </a>
 
