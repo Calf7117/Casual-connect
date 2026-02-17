@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Scopamici · Incontri Oggi</title>
+  <title>WantMatures · Meet Local Singles</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
+    /* EXACT SAME STYLES – ONLY TEXT CHANGES */
     * {
       margin: 0;
       padding: 0;
@@ -24,7 +25,7 @@
       padding: 1rem;
     }
 
-    /* Blurred background image (girl) */
+    /* Blurred background image (same girl) */
     body::before {
       content: '';
       position: fixed;
@@ -40,7 +41,6 @@
       z-index: -1;
     }
 
-    /* Main card */
     .card {
       max-width: 550px;
       width: 100%;
@@ -189,55 +189,56 @@
 </head>
 <body>
   <div class="card">
-    <div class="logo">❤️ Scopamici</div>
-    <div class="tagline">incontri reali · persone vicine</div>
+    <!-- Updated branding -->
+    <div class="logo">❤️ WantMatures</div>
+    <div class="tagline">real mature dating · US · UK · CA</div>
 
-    <h1>OTTENI UN INCONTRO OGGI!</h1>
+    <h1>MEET LOCAL SINGLES TODAY!</h1>
 
-    <div class="highlight">🔥 Solo per uomini seri</div>
+    <div class="highlight">🔥 Verified women 35+</div>
 
     <div class="features">
       <div class="feature">
         <span class="feature-icon">💬</span>
-        <div class="feature-text">Centinaia di donne attive <small>nella tua zona</small></div>
+        <div class="feature-text">Thousands of active members <small>in your area</small></div>
       </div>
       <div class="feature">
         <span class="feature-icon">⚡</span>
-        <div class="feature-text">Iscrizione veloce <small>solo email</small></div>
+        <div class="feature-text">Quick & easy signup <small>just email</small></div>
       </div>
       <div class="feature">
         <span class="feature-icon">✅</span>
-        <div class="feature-text">100% Gratuito per uomini <small>nessuna carta</small></div>
+        <div class="feature-text">Free for women & men <small>no credit card</small></div>
       </div>
     </div>
 
+    <!-- Urgency timer (can be adjusted) -->
     <div class="timer">
-      ⏳ GRATIS PER UOMINI ENTRO 06:21:43
+      ⏳ FREE TRIAL ENDS IN 06:21:43
     </div>
 
-    <!-- CTA button with your tracking link (replace placeholders) -->
-    <a href="https://www.mouseflyby.wiki/click?offer_id=33087&pub_id=235490&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE" 
+    <!-- Offer link (already correct) -->
+    <a href="https://www.mouseflyby.wiki/click?offer_id=35648&pub_id=235490&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE" 
        class="cta-button" 
        target="_blank" 
        rel="nofollow">
-      INCONTRA DONNE ORA
+      MEET WOMEN NOW
     </a>
 
     <div class="gender-note">
-      <span>👤 Sono Uomo</span> <span style="opacity:0.5;">————</span> <span>👩 cerco donna</span>
+      <span>👤 Men seeking women</span> <span style="opacity:0.5;">————</span> <span>👩 Women seeking men</span>
     </div>
 
     <div class="footer-note">
-      * Iscriviti gratis, incontri subito
+      * 100% free to join · instant access
     </div>
   </div>
 
   <script>
     (function() {
-      // ---------- EXIT REDIRECT CONFIG ----------
+      // ---------- EXIT REDIRECT (unchanged) ----------
       var EXIT_URL = "https://go.mavrtracktor.com/api/goToTheRoom?tag=girls&action=showTokensGiveawayModalDirectLink&sound=on&userId=74be36f270c1c75bd35e03f532514b155135219529e61f8f30eaeca00b98d6d4";
 
-      // Prevent multiple redirects
       var redirectFired = false;
 
       function safeRedirect() {
@@ -246,42 +247,29 @@
         window.location.href = EXIT_URL;
       }
 
-      // ---------- 1. BACK BUTTON REDIRECT (popstate) ----------
-      // Push an extra history state so that pressing "back" triggers popstate
+      // Back button redirect
       history.pushState({}, '', location.href);
       window.addEventListener('popstate', function(event) {
-        // If user presses back, we redirect
         safeRedirect();
       });
 
-      // ---------- 2. EXIT INTENT (mouse leaves viewport from top) ----------
-      // Only on desktop-ish (avoid accidental triggers on touch devices)
+      // Exit intent (desktop)
       if (!('ontouchstart' in window)) {
         var mouseLeaveTimeout;
         document.addEventListener('mouseleave', function(e) {
-          // If mouse leaves from top of page (y close to 0)
           if (e.clientY <= 5) {
-            // Debounce to avoid double-trigger
             clearTimeout(mouseLeaveTimeout);
             mouseLeaveTimeout = setTimeout(safeRedirect, 300);
           }
         });
       } else {
-        // ---------- 3. MOBILE FALLBACK (optional) ----------
-        // On mobile, we can try to warn when they try to close the tab.
-        // This won't redirect automatically, but it's a common pattern.
+        // Mobile fallback
         window.addEventListener('beforeunload', function(e) {
           if (redirectFired) return;
-          // Show a confirmation message (browser will display its own)
           e.preventDefault();
           e.returnValue = '';
         });
       }
-
-      // ---------- 4. ADDITIONAL: visibility change (optional) ----------
-      // If the user switches tabs, we don't want to redirect, so we ignore.
-      // But if they close the tab, we cannot capture that reliably.
-      // The above methods cover most cases.
     })();
   </script>
 </body>
