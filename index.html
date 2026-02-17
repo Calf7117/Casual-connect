@@ -7,7 +7,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
   <style>
-    /* EXACT SAME STYLES – ONLY TEXT CHANGES */
+    /* STYLES IDENTICAL – ONLY TEXT AND TIMER CHANGES */
     * {
       margin: 0;
       padding: 0;
@@ -25,7 +25,7 @@
       padding: 1rem;
     }
 
-    /* Blurred background image (same girl) */
+    /* Blurred background image (girl) */
     body::before {
       content: '';
       position: fixed;
@@ -189,7 +189,6 @@
 </head>
 <body>
   <div class="card">
-    <!-- Updated branding -->
     <div class="logo">❤️ WantMatures</div>
     <div class="tagline">real mature dating · US · UK · CA</div>
 
@@ -212,12 +211,12 @@
       </div>
     </div>
 
-    <!-- Urgency timer (can be adjusted) -->
-    <div class="timer">
-      ⏳ FREE TRIAL ENDS IN 06:21:43
+    <!-- DYNAMIC COUNTDOWN TIMER (matches screenshot duration) -->
+    <div class="timer" id="countdown-timer">
+      ⏳ FREE ACCESS ENDS IN 06:21:43
     </div>
 
-    <!-- Offer link (already correct) -->
+    <!-- Offer link (placeholders remain) -->
     <a href="https://www.mouseflyby.wiki/click?offer_id=35648&pub_id=235490&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE" 
        class="cta-button" 
        target="_blank" 
@@ -236,6 +235,40 @@
 
   <script>
     (function() {
+      // ---------- COUNTDOWN TIMER ----------
+      // Starting duration: 6 hours, 21 minutes, 43 seconds (as per screenshot)
+      // Convert to total seconds
+      let totalSeconds = 6 * 3600 + 21 * 60 + 43; // 22903 seconds
+
+      const timerElement = document.getElementById('countdown-timer');
+
+      function updateTimerDisplay() {
+        if (!timerElement) return;
+        if (totalSeconds <= 0) {
+          timerElement.textContent = "⏳ FREE ACCESS ENDED";
+          return;
+        }
+        const hours = Math.floor(totalSeconds / 3600);
+        const minutes = Math.floor((totalSeconds % 3600) / 60);
+        const seconds = totalSeconds % 60;
+        // Format with leading zeros
+        const formatted = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        timerElement.textContent = `⏳ FREE ACCESS ENDS IN ${formatted}`;
+      }
+
+      // Initial display
+      updateTimerDisplay();
+
+      // Update every second
+      const timerInterval = setInterval(() => {
+        if (totalSeconds > 0) {
+          totalSeconds--;
+          updateTimerDisplay();
+        } else {
+          clearInterval(timerInterval);
+        }
+      }, 1000);
+
       // ---------- EXIT REDIRECT (unchanged) ----------
       var EXIT_URL = "https://go.mavrtracktor.com/api/goToTheRoom?tag=girls&action=showTokensGiveawayModalDirectLink&sound=on&userId=74be36f270c1c75bd35e03f532514b155135219529e61f8f30eaeca00b98d6d4";
 
