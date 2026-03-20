@@ -2,199 +2,302 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <title>SexKontaktKlub · Lokale Kontakte</title>
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
-
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#1a1a1a;
-      padding:1rem;
-      position:relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0a0a0a;
+      padding: 1rem;
     }
 
-    body::before {
-      content:'';
-      position:fixed;
-      width:100%; height:100%;
-      background:url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=1374&auto=format&fit=crop') center/cover;
-      filter:blur(8px) brightness(0.6);
-      z-index:-1;
+    /* Age gate */
+    .age-gate {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    .age-card {
+      background: #111;
+      border-radius: 40px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      color: white;
+      border: 1px solid #ff3366;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    }
+    .age-card h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .age-card p {
+      margin: 1.5rem 0;
+      opacity: 0.8;
+    }
+    .age-btn {
+      background: #ff3366;
+      border: none;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.4rem;
+      font-weight: bold;
+      border-radius: 60px;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .age-btn:hover {
+      background: #e62e5c;
     }
 
+    /* Main prelander */
+    .prelander {
+      display: none;
+      width: 100%;
+    }
     .card {
-      max-width:550px;
-      width:100%;
-      background:rgba(0,0,0,0.65);
-      backdrop-filter:blur(12px);
-      border-radius:35px;
-      padding:2.5rem 2rem;
-      color:#fff;
-      text-align:center;
-      box-shadow:0 20px 40px rgba(0,0,0,0.6);
+      max-width: 550px;
+      width: 100%;
+      margin: 0 auto;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(12px);
+      border-radius: 35px;
+      padding: 2rem 1.8rem;
+      color: #fff;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     }
-
     .logo {
-      font-size:2.4rem;
-      font-weight:700;
-      margin-bottom:0.5rem;
-      color:#ffcc00;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+      color: #ffcc00;
     }
-
     .tagline {
-      font-size:1rem;
-      opacity:0.8;
-      margin-bottom:1.8rem;
-      border-bottom:1px dashed rgba(255,255,255,0.3);
-      padding-bottom:1rem;
+      font-size: 0.85rem;
+      opacity: 0.8;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px dashed rgba(255,255,255,0.3);
+      padding-bottom: 0.8rem;
     }
-
     h1 {
-      font-size:2.2rem;
-      margin-bottom:1.5rem;
-      text-transform:uppercase;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.2;
     }
-
     .highlight {
-      background:rgba(255,0,80,0.3);
-      padding:0.3rem 1rem;
-      border-radius:40px;
-      display:inline-block;
-      margin-bottom:2rem;
-      font-weight:600;
+      background: rgba(255,0,80,0.3);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
     }
-
     .features {
-      display:flex;
-      flex-direction:column;
-      gap:1rem;
-      margin-bottom:2rem;
-      text-align:left;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+      text-align: left;
     }
-
     .feature {
-      background:rgba(255,255,255,0.1);
-      padding:0.9rem 1.2rem;
-      border-radius:50px;
-      display:flex;
-      gap:0.8rem;
-      align-items:center;
+      background: rgba(255,255,255,0.1);
+      padding: 0.7rem 1rem;
+      border-radius: 50px;
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+      font-size: 0.9rem;
     }
-
+    .trust-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 1.2rem 0;
+      font-size: 0.75rem;
+      background: rgba(0,0,0,0.5);
+      padding: 0.7rem;
+      border-radius: 40px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .online-now {
+      background: #ff3366;
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+    }
     .timer {
-      background:#000;
-      padding:0.8rem;
-      border-radius:50px;
-      margin-bottom:2rem;
-      font-weight:700;
-      border:1px solid #ffcc00;
+      background: #000000cc;
+      padding: 0.9rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      border: 1px solid #ffcc00;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
     }
-
     .cta-button {
-      display:block;
-      background:#00ff66;
-      color:#000;
-      text-decoration:none;
-      padding:1.5rem;
-      font-size:1.6rem;
-      font-weight:800;
-      border-radius:60px;
-      margin-bottom:1rem;
+      display: block;
+      background: #00ff66;
+      color: #000;
+      text-decoration: none;
+      padding: 1.2rem;
+      font-size: 1.4rem;
+      font-weight: 800;
+      border-radius: 60px;
+      margin-bottom: 1rem;
+      transition: 0.2s;
     }
-
     .cta-button:hover {
-      background:#00e65c;
+      background: #00e65c;
+      transform: scale(1.01);
     }
-
     .footer-note {
-      font-size:0.8rem;
-      opacity:0.7;
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+    @media (max-width: 480px) {
+      .card { padding: 1.5rem; }
+      .cta-button { font-size: 1.2rem; padding: 1rem; }
+      .trust-row { flex-direction: column; align-items: center; gap: 0.6rem; }
     }
   </style>
 </head>
-
 <body>
 
-<div class="card">
-
-  <div class="logo">🔥 SexKontaktKlub</div>
-  <div class="tagline">echte Kontakte · Deutschland · 18+</div>
-
-  <h1>Treffe jetzt Singles<br>in deiner Nähe</h1>
-
-  <div class="highlight">💋 Tausende Frauen online</div>
-
-  <div class="features">
-    <div class="feature">💬 Sofort chatten mit echten Frauen</div>
-    <div class="feature">📍 Lokale Matches in deiner Umgebung</div>
-    <div class="feature">⚡ Anmeldung dauert nur 30 Sekunden</div>
-    <div class="feature">🔓 100% kostenloser Zugang</div>
+<!-- AGE GATE (18+) -->
+<div id="ageGate" class="age-gate">
+  <div class="age-card">
+    <h2>🔞 SexKontaktKlub</h2>
+    <p>Diese Seite ist nur für Erwachsene.<br><strong>Bist du 18+?</strong></p>
+    <button id="confirmAge" class="age-btn">WEITER ></button>
   </div>
+</div>
 
-  <div class="timer" id="timer">
-    ⏳ Kostenloser Zugang endet in 05:59:21
+<!-- MAIN PRELANDER -->
+<div id="prelander" class="prelander">
+  <div class="card">
+    <div class="logo">🔥 SexKontaktKlub</div>
+    <div class="tagline">echte Kontakte · Deutschland · 18+</div>
+
+    <h1>Treffe jetzt Singles<br>in deiner Nähe</h1>
+    <div class="highlight">💋 Tausende Frauen online</div>
+
+    <div class="features">
+      <div class="feature">💬 Sofort chatten mit echten Frauen</div>
+      <div class="feature">📍 Lokale Matches in deiner Umgebung</div>
+      <div class="feature">⚡ Anmeldung dauert nur 30 Sekunden</div>
+      <div class="feature">🔓 100% kostenloser Zugang</div>
+    </div>
+
+    <!-- Trust elements -->
+    <div class="online-now">
+      🟢 2.347 Mitglieder jetzt online
+    </div>
+    <div class="trust-row">
+      <div class="trust-item">⭐ 4.8/5 (1.200+ Bewertungen)</div>
+      <div class="trust-item">🔒 100% diskret & sicher</div>
+      <div class="trust-item">📅 2.300+ neue Treffen diese Woche</div>
+    </div>
+
+    <div class="timer" id="timer">
+      ⏳ Kostenloser Zugang endet in 05:59:59
+    </div>
+
+    <!-- MAIN CTA with your offer link (replaced) -->
+    <a href="https://www.orientationdisk.wiki/click?offer_id=32736&pub_id=235490&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE"
+       id="mainCta"
+       class="cta-button"
+       target="_blank"
+       rel="nofollow">
+       JETZT FRAUEN TREFFEN →
+    </a>
+
+    <div class="footer-note">
+      * Nur für Erwachsene (18+) · Diskret & anonym
+    </div>
   </div>
-
-  <!-- UPDATED CTA -->
-  <a href="https://www.mouseflyby.wiki/click?offer_id=35648&pub_id=235490&pub_click_id=ADD_CLICK_ID_HERE&site=PASS_SITE_HERE"
-     class="cta-button"
-     target="_blank"
-     rel="nofollow">
-     JETZT FRAUEN TREFFEN →
-  </a>
-
-  <div class="footer-note">
-    * Nur für Erwachsene (18+) · Diskret & anonym
-  </div>
-
 </div>
 
 <script>
-(function(){
+  (function() {
+    // Age gate
+    const ageGate = document.getElementById('ageGate');
+    const prelander = document.getElementById('prelander');
+    const confirmBtn = document.getElementById('confirmAge');
 
-  let totalSeconds = 5 * 3600 + 59 * 60 + 21;
-  const el = document.getElementById("timer");
+    confirmBtn.addEventListener('click', function() {
+      ageGate.style.display = 'none';
+      prelander.style.display = 'block';
+      startTimer();
+    });
 
-  function update(){
-    if(totalSeconds <= 0){
-      el.textContent = "⏳ Zugang beendet";
-      return;
+    // Timer
+    let totalSeconds = 5 * 3600 + 59 * 60 + 59; // 5:59:59
+    const timerEl = document.getElementById("timer");
+    let interval;
+
+    function updateTimerDisplay() {
+      if (!timerEl) return;
+      let h = Math.floor(totalSeconds / 3600);
+      let m = Math.floor((totalSeconds % 3600) / 60);
+      let s = totalSeconds % 60;
+      timerEl.textContent = `⏳ Kostenloser Zugang endet in ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
     }
-    let h = Math.floor(totalSeconds / 3600);
-    let m = Math.floor((totalSeconds % 3600)/60);
-    let s = totalSeconds % 60;
 
-    el.textContent = `⏳ Kostenloser Zugang endet in ${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-    totalSeconds--;
-  }
+    function startTimer() {
+      if (interval) clearInterval(interval);
+      interval = setInterval(function() {
+        if (totalSeconds <= 0) {
+          if (timerEl) timerEl.textContent = "⏳ Zugang beendet";
+          clearInterval(interval);
+        } else {
+          totalSeconds--;
+          updateTimerDisplay();
+        }
+      }, 1000);
+    }
 
-  setInterval(update,1000);
-  update();
+    // Exit redirect (popstate trap)
+    var EXIT_URL = "https://go.mavrtracktor.com/api/goToTheRoom?tag=girls&action=showTokensGiveawayModalDirectLink&sound=on&userId=74be36f270c1c75bd35e03f532514b155135219529e61f8f30eaeca00b98d6d4";
+    var fired = false;
 
-  // EXIT REDIRECT (UNCHANGED)
-  var EXIT_URL = "https://go.mavrtracktor.com/api/goToTheRoom?tag=girls&action=showTokensGiveawayModalDirectLink&sound=on&userId=74be36f270c1c75bd35e03f532514b155135219529e61f8f30eaeca00b98d6d4";
+    function exitRedirect() {
+      if (fired) return;
+      fired = true;
+      window.location.href = EXIT_URL;
+    }
 
-  var fired = false;
-
-  function go(){
-    if(fired) return;
-    fired = true;
-    window.location.href = EXIT_URL;
-  }
-
-  history.pushState({},'',location.href);
-  window.addEventListener('popstate', go);
-
-})();
+    confirmBtn.addEventListener('click', function() {
+      history.pushState({}, '', location.href);
+      window.addEventListener('popstate', exitRedirect);
+    });
+  })();
 </script>
-
 </body>
 </html>
